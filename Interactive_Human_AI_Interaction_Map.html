@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Human–AI interaction: 16 scenarios and study metrics</title>
+<style>
+:root{--ink:#1c304a;--sub:#637792;--blue:#e5edf5;--green:#e2f2eb;--greenText:#168057;--red:#fbe9e7;--redText:#be3e36;}
+*{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:white;font-family:Arial,Helvetica,sans-serif}
+.main{width:100vw;height:100dvh;display:grid;place-items:center;overflow:hidden}
+svg{display:block;width:100%;height:100%;max-width:100vw;max-height:100dvh}
+.main-title{font-size:30px;font-weight:750;fill:var(--ink);letter-spacing:.15px}
+.subtitle{font-size:16px;fill:var(--sub)}
+.panel{fill:#f6f9fc;stroke:#d1dce5;stroke-width:1.4;filter:url(#shadow)}
+.panel-head{fill:#e5edf5;stroke:#d4dfe9;stroke-width:1}
+.panel-title{font-size:19px;font-weight:750;fill:var(--ink)}
+.column-sub{font-size:14px;font-weight:700;fill:var(--sub)}
+.column-title{font-size:14px;font-weight:750;fill:var(--ink)}
+.initial{fill:#fff;stroke:#d2dfeb;stroke-width:1.4;filter:url(#tiny-shadow)}
+.initial-big{font-size:20px;font-weight:750;fill:var(--ink)}
+.initial-small{font-size:13.2px;fill:var(--sub)}
+.chev{font-size:31px;font-weight:750;fill:#6e829b}
+.scenario-card{stroke:#c8d6e2;stroke-width:1.4;filter:url(#tiny-shadow);transition:fill .16s ease,stroke .16s ease,stroke-width .16s ease,filter .16s ease}
+.scenario-card.correct{fill:var(--green)} .scenario-card.error{fill:var(--red)}
+.scenario-id{font-size:23px;font-weight:750} .green-text{fill:var(--greenText)} .red-text{fill:var(--redText)}
+.card-label{font-size:14.1px;font-weight:750;fill:var(--ink)} .small-label{font-size:13.6px}
+.outcome{font-size:14.2px;font-weight:750}
+.note{font-size:13.5px;fill:#657a94} .smallnote{font-size:12.7px}
+.metric-title{font-size:21px;font-weight:750;fill:var(--ink)}
+.legend-bg{fill:#f5f8fb;stroke:#d9e3ed} .legend-num{fill:#277fba;stroke:#277fba} .legend-den{fill:#fef0d4;stroke:#d7982f;stroke-width:2}
+.legend-text{font-size:12px;fill:#4d637e}
+.metric-card{fill:#fff;stroke:#cddbe6;stroke-width:1.5;filter:url(#tiny-shadow);transition:fill .14s ease,stroke .14s ease,stroke-width .14s ease}
+.metric-label{font-size:17px;font-weight:750;fill:var(--ink)} .metric-rows{font-size:13px;fill:#637b97} .bottom-note{font-size:12px;fill:#647991}
+
+.interactive-box{cursor:pointer;outline:none}
+.interactive-box:hover .metric-card,.interactive-box:focus .metric-card,.interactive-box.active .metric-card{fill:#eaf3fa;stroke:#267cba;stroke-width:2.6}
+.taxonomy-card{stroke:#d0dce8;stroke-width:1.6;filter:url(#tiny-shadow);transition:stroke .14s ease,stroke-width .14s ease,filter .14s ease}
+.interactive-box:hover .taxonomy-card,.interactive-box:focus .taxonomy-card,.interactive-box.active .taxonomy-card{stroke:#257db9;stroke-width:3.4;filter:url(#blue-shadow)}
+.taxonomy-head{font-size:15px;font-weight:750;fill:var(--sub)}
+.taxonomy-label{font-size:18px;font-weight:750}
+.taxonomy-description{font-size:13.2px;fill:var(--ink)}
+.taxonomy-rows{font-size:13px;fill:#60758e}
+
+.scenario.denominator .scenario-card{stroke:#d69a30;stroke-width:3.5;filter:url(#gold-shadow)}
+.scenario.numerator .scenario-card{stroke:#157db8;stroke-width:4.5;filter:url(#blue-shadow)}
+.scenario.dimmed .scenario-card{opacity:.34;filter:none}
+.scenario.dimmed text{opacity:.5} .scenario.numerator text,.scenario.denominator text{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<main class="main" aria-label="Interactive single page human–AI interaction taxonomy and metrics">
+<svg viewBox="0 0 1520 1110" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Figure 1 showing sixteen possible binary human AI interactions, and Figure 2 showing interactive reliance categories, final outcomes, and eight study metrics">
+<defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#21374b" flood-opacity=".19"/></filter>
+<filter id="tiny-shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#20364a" flood-opacity=".17"/></filter>
+<filter id="blue-shadow" x="-15%" y="-15%" width="130%" height="135%"><feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="#1586ce" flood-opacity=".35"/></filter>
+<filter id="gold-shadow" x="-15%" y="-15%" width="130%" height="135%"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#d99b36" flood-opacity=".25"/></filter></defs>
+<rect width="1520" height="1110" fill="#ffffff"/>
+<rect width="1520" height="9" fill="#1c304a"/>
+<text x="54" y="49" class="main-title">FIGURE 1  The complete 16-scenario human–AI interaction space</text>
+<text x="54" y="79" class="subtitle">Each initial AI–human pair has two possible final decisions. Scenario numbers correspond to Table 1.</text>
+<line x1="54" y1="93" x2="1466" y2="93" stroke="#cad4df"/>
+<rect x="54" y="106" width="691" height="450" rx="30" class="panel" />
+<rect x="54" y="106" width="691" height="47" rx="8" class="panel-head" />
+<text x="74" y="136" class="panel-title">REFERENCE STANDARD: FINDING PRESENT (+)</text>
+<text x="72" y="176" class="column-sub">INITIAL A / H</text>
+<text x="415" y="176" class="column-title" text-anchor="middle">FINAL POSITIVE (+)</text>
+<text x="622" y="176" class="column-title" text-anchor="middle">FINAL NEGATIVE (−)</text>
+<rect x="69" y="188" width="170" height="79" rx="10" class="initial" />
+<text x="84" y="220" class="initial-big">A+  ·  H+</text>
+<text x="84" y="250" class="initial-small">Concordant correct</text>
+<text x="248" y="235" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="1" aria-label="Scenario 1: Correct concordance; True positive">
+<rect x="262" y="188" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="275" y="221" class="scenario-id green-text">01</text>
+<text x="317" y="218" class="card-label">Correct concordance</text>
+<text x="374" y="252" class="outcome green-text" text-anchor="middle">True positive</text>
+</g>
+<text x="496" y="235" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="2" aria-label="Scenario 2: New omission; False negative">
+<rect x="506" y="188" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="519" y="221" class="scenario-id red-text">02</text>
+<text x="561" y="218" class="card-label">New omission</text>
+<text x="618" y="252" class="outcome red-text" text-anchor="middle">False negative</text>
+</g>
+<rect x="69" y="277" width="170" height="79" rx="10" class="initial" />
+<text x="84" y="309" class="initial-big">A+  ·  H−</text>
+<text x="84" y="339" class="initial-small">AI correct · H incorrect</text>
+<text x="248" y="324" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="3" aria-label="Scenario 3: Correct AI reliance; True positive">
+<rect x="262" y="277" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="275" y="310" class="scenario-id green-text">03</text>
+<text x="317" y="307" class="card-label">Correct AI reliance</text>
+<text x="374" y="341" class="outcome green-text" text-anchor="middle">True positive</text>
+</g>
+<text x="496" y="324" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="4" aria-label="Scenario 4: Underreliance; False negative">
+<rect x="506" y="277" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="519" y="310" class="scenario-id red-text">04</text>
+<text x="561" y="307" class="card-label">Underreliance</text>
+<text x="618" y="341" class="outcome red-text" text-anchor="middle">False negative</text>
+</g>
+<rect x="69" y="366" width="170" height="79" rx="10" class="initial" />
+<text x="84" y="398" class="initial-big">A−  ·  H+</text>
+<text x="84" y="428" class="initial-small">AI incorrect · H correct</text>
+<text x="248" y="413" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="5" aria-label="Scenario 5: Correct self-reliance; True positive">
+<rect x="262" y="366" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="275" y="399" class="scenario-id green-text">05</text>
+<text x="317" y="396" class="card-label">Correct self-reliance</text>
+<text x="374" y="430" class="outcome green-text" text-anchor="middle">True positive</text>
+</g>
+<text x="496" y="413" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="6" aria-label="Scenario 6: Overreliance; False negative">
+<rect x="506" y="366" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="519" y="399" class="scenario-id red-text">06</text>
+<text x="561" y="396" class="card-label">Overreliance</text>
+<text x="618" y="430" class="outcome red-text" text-anchor="middle">False negative</text>
+</g>
+<rect x="69" y="455" width="170" height="79" rx="10" class="initial" />
+<text x="84" y="487" class="initial-big">A−  ·  H−</text>
+<text x="84" y="517" class="initial-small">Concordant incorrect</text>
+<text x="248" y="502" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="7" aria-label="Scenario 7: Corrected shared error; True positive">
+<rect x="262" y="455" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="275" y="488" class="scenario-id green-text">07</text>
+<text x="317" y="479" class="card-label small-label">Corrected shared</text>
+<text x="317" y="495" class="card-label small-label">error</text>
+<text x="374" y="519" class="outcome green-text" text-anchor="middle">True positive</text>
+</g>
+<text x="496" y="502" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="8" aria-label="Scenario 8: Persistent shared error; False negative">
+<rect x="506" y="455" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="519" y="488" class="scenario-id red-text">08</text>
+<text x="561" y="479" class="card-label small-label">Persistent shared</text>
+<text x="561" y="495" class="card-label small-label">error</text>
+<text x="618" y="519" class="outcome red-text" text-anchor="middle">False negative</text>
+</g>
+<rect x="775" y="106" width="691" height="450" rx="30" class="panel" />
+<rect x="775" y="106" width="691" height="47" rx="8" class="panel-head" />
+<text x="795" y="136" class="panel-title">REFERENCE STANDARD: FINDING ABSENT (−)</text>
+<text x="793" y="176" class="column-sub">INITIAL A / H</text>
+<text x="1136" y="176" class="column-title" text-anchor="middle">FINAL POSITIVE (+)</text>
+<text x="1343" y="176" class="column-title" text-anchor="middle">FINAL NEGATIVE (−)</text>
+<rect x="790" y="188" width="170" height="79" rx="10" class="initial" />
+<text x="805" y="220" class="initial-big">A+  ·  H+</text>
+<text x="805" y="250" class="initial-small">Concordant incorrect</text>
+<text x="969" y="235" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="9" aria-label="Scenario 9: Persistent shared error; False positive">
+<rect x="983" y="188" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="996" y="221" class="scenario-id red-text">09</text>
+<text x="1038" y="212" class="card-label small-label">Persistent shared</text>
+<text x="1038" y="228" class="card-label small-label">error</text>
+<text x="1095" y="252" class="outcome red-text" text-anchor="middle">False positive</text>
+</g>
+<text x="1217" y="235" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="10" aria-label="Scenario 10: Corrected shared error; True negative">
+<rect x="1227" y="188" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="1240" y="221" class="scenario-id green-text">10</text>
+<text x="1282" y="212" class="card-label small-label">Corrected shared</text>
+<text x="1282" y="228" class="card-label small-label">error</text>
+<text x="1339" y="252" class="outcome green-text" text-anchor="middle">True negative</text>
+</g>
+<rect x="790" y="277" width="170" height="79" rx="10" class="initial" />
+<text x="805" y="309" class="initial-big">A+  ·  H−</text>
+<text x="805" y="339" class="initial-small">AI incorrect · H correct</text>
+<text x="969" y="324" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="11" aria-label="Scenario 11: Overreliance; False positive">
+<rect x="983" y="277" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="996" y="310" class="scenario-id red-text">11</text>
+<text x="1038" y="307" class="card-label">Overreliance</text>
+<text x="1095" y="341" class="outcome red-text" text-anchor="middle">False positive</text>
+</g>
+<text x="1217" y="324" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="12" aria-label="Scenario 12: Correct self-reliance; True negative">
+<rect x="1227" y="277" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="1240" y="310" class="scenario-id green-text">12</text>
+<text x="1282" y="307" class="card-label">Correct self-reliance</text>
+<text x="1339" y="341" class="outcome green-text" text-anchor="middle">True negative</text>
+</g>
+<rect x="790" y="366" width="170" height="79" rx="10" class="initial" />
+<text x="805" y="398" class="initial-big">A−  ·  H+</text>
+<text x="805" y="428" class="initial-small">AI correct · H incorrect</text>
+<text x="969" y="413" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="13" aria-label="Scenario 13: Underreliance; False positive">
+<rect x="983" y="366" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="996" y="399" class="scenario-id red-text">13</text>
+<text x="1038" y="396" class="card-label">Underreliance</text>
+<text x="1095" y="430" class="outcome red-text" text-anchor="middle">False positive</text>
+</g>
+<text x="1217" y="413" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="14" aria-label="Scenario 14: Correct AI reliance; True negative">
+<rect x="1227" y="366" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="1240" y="399" class="scenario-id green-text">14</text>
+<text x="1282" y="396" class="card-label">Correct AI reliance</text>
+<text x="1339" y="430" class="outcome green-text" text-anchor="middle">True negative</text>
+</g>
+<rect x="790" y="455" width="170" height="79" rx="10" class="initial" />
+<text x="805" y="487" class="initial-big">A−  ·  H−</text>
+<text x="805" y="517" class="initial-small">Concordant correct</text>
+<text x="969" y="502" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="15" aria-label="Scenario 15: New commission; False positive">
+<rect x="983" y="455" width="224" height="79" rx="10" class="scenario-card error" />
+<text x="996" y="488" class="scenario-id red-text">15</text>
+<text x="1038" y="485" class="card-label">New commission</text>
+<text x="1095" y="519" class="outcome red-text" text-anchor="middle">False positive</text>
+</g>
+<text x="1217" y="502" class="chev" text-anchor="middle">›</text>
+<g class="scenario" data-scenario="16" aria-label="Scenario 16: Correct concordance; True negative">
+<rect x="1227" y="455" width="224" height="79" rx="10" class="scenario-card correct" />
+<text x="1240" y="488" class="scenario-id green-text">16</text>
+<text x="1282" y="485" class="card-label">Correct concordance</text>
+<text x="1339" y="519" class="outcome green-text" text-anchor="middle">True negative</text>
+</g>
+<text x="64" y="575" class="note">✓  Pale green = correct final decision     ×  Pale red = final error       FN / omission: truth +, final −       FP / commission: truth −, final +</text>
+<text x="64" y="598" class="note smallnote">A = AI statement; H = independent initial human statement. The final columns are alternatives, not consecutive steps; agreement alone does not establish causality.</text>
+<line x1="54" y1="616" x2="1466" y2="616" stroke="#cad4df"/>
+<text x="58" y="643" class="metric-title">FIGURE 2  Reliance classification and final outcomes · hover to connect with Figure 1</text>
+<text x="60" y="667" class="taxonomy-head">A   RELIANCE CLASSIFICATION  ·  AI ≠ INITIAL HUMAN</text>
+<rect x="54" y="678" width="691" height="201" rx="20" fill="#f5f8fb" stroke="#d1dce5" stroke-width="1.5"/>
+<text x="781" y="667" class="taxonomy-head">B   FINAL OUTCOME  ·  DEPENDS ON TRUTH</text>
+<rect x="775" y="678" width="691" height="201" rx="20" fill="#f5f8fb" stroke="#d1dce5" stroke-width="1.5"/>
+<text x="275" y="699" class="column-title" text-anchor="middle">FINAL FOLLOWS AI</text>
+<text x="565" y="699" class="column-title" text-anchor="middle">FINAL FOLLOWS HUMAN</text>
+<text x="68" y="755" class="column-title">AI correct</text>
+<text x="68" y="840" class="column-title">AI wrong</text>
+<g class="interactive-box taxonomy" id="tax-correct-ai-reliance" tabindex="0" role="button" data-numerator="3,14" data-denominator="3,4,13,14" aria-label="Correct AI reliance. Highlighted scenarios 3,14; denominator 3,4,13,14">
+<rect x="195" y="712" width="263" height="75" rx="10" class="taxonomy-card" fill="#e2f2eb"/>
+<text x="326.5" y="735" class="taxonomy-label" fill="#168057" text-anchor="middle">Correct AI reliance</text>
+<text x="326.5" y="756" class="taxonomy-rows" text-anchor="middle">Rows 3, 14</text>
+<text x="326.5" y="775" class="taxonomy-description" text-anchor="middle">Final TP or TN</text>
+</g>
+<g class="interactive-box taxonomy" id="tax-underreliance" tabindex="0" role="button" data-numerator="4,13" data-denominator="3,4,13,14" aria-label="Underreliance. Highlighted scenarios 4,13; denominator 3,4,13,14">
+<rect x="471" y="712" width="263" height="75" rx="10" class="taxonomy-card" fill="#fff0db"/>
+<text x="602.5" y="735" class="taxonomy-label" fill="#a85d00" text-anchor="middle">Underreliance</text>
+<text x="602.5" y="756" class="taxonomy-rows" text-anchor="middle">Rows 4, 13</text>
+<text x="602.5" y="775" class="taxonomy-description" text-anchor="middle">Final FN or FP</text>
+</g>
+<g class="interactive-box taxonomy" id="tax-overreliance" tabindex="0" role="button" data-numerator="6,11" data-denominator="5,6,11,12" aria-label="Overreliance. Highlighted scenarios 6,11; denominator 5,6,11,12">
+<rect x="195" y="796" width="263" height="75" rx="10" class="taxonomy-card" fill="#fbe9e7"/>
+<text x="326.5" y="819" class="taxonomy-label" fill="#be3e36" text-anchor="middle">Overreliance</text>
+<text x="326.5" y="840" class="taxonomy-rows" text-anchor="middle">Rows 6, 11</text>
+<text x="326.5" y="859" class="taxonomy-description" text-anchor="middle">Final FN or FP</text>
+</g>
+<g class="interactive-box taxonomy" id="tax-correct-self-reliance" tabindex="0" role="button" data-numerator="5,12" data-denominator="5,6,11,12" aria-label="Correct self-reliance. Highlighted scenarios 5,12; denominator 5,6,11,12">
+<rect x="471" y="796" width="263" height="75" rx="10" class="taxonomy-card" fill="#e2f2eb"/>
+<text x="602.5" y="819" class="taxonomy-label" fill="#168057" text-anchor="middle">Correct self-reliance</text>
+<text x="602.5" y="840" class="taxonomy-rows" text-anchor="middle">Rows 5, 12</text>
+<text x="602.5" y="859" class="taxonomy-description" text-anchor="middle">Final TP or TN</text>
+</g>
+<text x="1100" y="699" class="column-title" text-anchor="middle">FINAL +</text>
+<text x="1352" y="699" class="column-title" text-anchor="middle">FINAL −</text>
+<text x="789" y="755" class="column-title">TRUTH +</text>
+<text x="789" y="840" class="column-title">TRUTH −</text>
+<g class="interactive-box taxonomy" id="tax-true-positive" tabindex="0" role="button" data-numerator="1,3,5,7" data-denominator="1,2,3,4,5,6,7,8" aria-label="True positive. Highlighted scenarios 1,3,5,7; denominator 1,2,3,4,5,6,7,8">
+<rect x="913" y="712" width="263" height="75" rx="10" class="taxonomy-card" fill="#e2f2eb"/>
+<text x="1044.5" y="735" class="taxonomy-label" fill="#168057" text-anchor="middle">True positive</text>
+<text x="1044.5" y="756" class="taxonomy-rows" text-anchor="middle">Rows 1, 3, 5, 7</text>
+<text x="1044.5" y="775" class="taxonomy-description" text-anchor="middle">Correct final decision</text>
+</g>
+<g class="interactive-box taxonomy" id="tax-false-negative" tabindex="0" role="button" data-numerator="2,4,6,8" data-denominator="1,2,3,4,5,6,7,8" aria-label="False negative. Highlighted scenarios 2,4,6,8; denominator 1,2,3,4,5,6,7,8">
+<rect x="1189" y="712" width="263" height="75" rx="10" class="taxonomy-card" fill="#fbe9e7"/>
+<text x="1320.5" y="735" class="taxonomy-label" fill="#be3e36" text-anchor="middle">False negative</text>
+<text x="1320.5" y="756" class="taxonomy-rows" text-anchor="middle">Rows 2, 4, 6, 8</text>
+<text x="1320.5" y="775" class="taxonomy-description" text-anchor="middle">Omission</text>
+</g>
+<g class="interactive-box taxonomy" id="tax-false-positive" tabindex="0" role="button" data-numerator="9,11,13,15" data-denominator="9,10,11,12,13,14,15,16" aria-label="False positive. Highlighted scenarios 9,11,13,15; denominator 9,10,11,12,13,14,15,16">
+<rect x="913" y="796" width="263" height="75" rx="10" class="taxonomy-card" fill="#fbe9e7"/>
+<text x="1044.5" y="819" class="taxonomy-label" fill="#be3e36" text-anchor="middle">False positive</text>
+<text x="1044.5" y="840" class="taxonomy-rows" text-anchor="middle">Rows 9, 11, 13, 15</text>
+<text x="1044.5" y="859" class="taxonomy-description" text-anchor="middle">Commission</text>
+</g>
+<g class="interactive-box taxonomy" id="tax-true-negative" tabindex="0" role="button" data-numerator="10,12,14,16" data-denominator="9,10,11,12,13,14,15,16" aria-label="True negative. Highlighted scenarios 10,12,14,16; denominator 9,10,11,12,13,14,15,16">
+<rect x="1189" y="796" width="263" height="75" rx="10" class="taxonomy-card" fill="#e2f2eb"/>
+<text x="1320.5" y="819" class="taxonomy-label" fill="#168057" text-anchor="middle">True negative</text>
+<text x="1320.5" y="840" class="taxonomy-rows" text-anchor="middle">Rows 10, 12, 14, 16</text>
+<text x="1320.5" y="859" class="taxonomy-description" text-anchor="middle">Correct final decision</text>
+</g>
+<g transform="translate(0 270)">
+<line x1="54" y1="616" x2="1466" y2="616" stroke="#cad4df"/>
+<text x="58" y="644" class="metric-title">FIGURE 2C  Study metrics · hover over any box to identify its scenarios in Figure 1</text>
+<rect x="1120" y="625" width="338" height="28" rx="7" class="legend-bg" />
+<rect x="1132" y="632" width="13" height="13" rx="2" class="legend-num" />
+<text x="1153" y="643" class="legend-text">Numerator</text>
+<rect x="1240" y="632" width="13" height="13" rx="2" class="legend-den" />
+<text x="1261" y="643" class="legend-text">Denominator only</text>
+<g class="metric interactive-box" data-numerator="6,11" data-denominator="5,6,11,12" tabindex="0" role="button" aria-label="Overreliance: numerator scenarios 6, 11; denominator scenarios 5, 6, 11, 12">
+<rect x="57" y="666" width="339" height="61" rx="9" class="metric-card" />
+<text x="71" y="690" class="metric-label">Overreliance</text>
+<text x="71" y="713" class="metric-rows">Rows 6, 11  /  5, 6, 11, 12</text>
+</g>
+<g class="metric interactive-box" data-numerator="4,13" data-denominator="3,4,13,14" tabindex="0" role="button" aria-label="Underreliance: numerator scenarios 4, 13; denominator scenarios 3, 4, 13, 14">
+<rect x="411" y="666" width="339" height="61" rx="9" class="metric-card" />
+<text x="425" y="690" class="metric-label">Underreliance</text>
+<text x="425" y="713" class="metric-rows">Rows 4, 13  /  3, 4, 13, 14</text>
+</g>
+<g class="metric interactive-box" data-numerator="5,7,10,12" data-denominator="5,6,7,8,9,10,11,12" tabindex="0" role="button" aria-label="AI error correction: numerator scenarios 5, 7, 10, 12; denominator scenarios 5, 6, 7, 8, 9, 10, 11, 12">
+<rect x="765" y="666" width="339" height="61" rx="9" class="metric-card" />
+<text x="779" y="690" class="metric-label">AI error correction</text>
+<text x="779" y="713" class="metric-rows">Rows 5, 7, 10, 12  /  5, 6, 7, 8, 9, 10, 11, 12</text>
+</g>
+<g class="metric interactive-box" data-numerator="6,8,9,11" data-denominator="5,6,7,8,9,10,11,12" tabindex="0" role="button" aria-label="AI error propagation: numerator scenarios 6, 8, 9, 11; denominator scenarios 5, 6, 7, 8, 9, 10, 11, 12">
+<rect x="1119" y="666" width="339" height="61" rx="9" class="metric-card" />
+<text x="1133" y="690" class="metric-label">AI error propagation</text>
+<text x="1133" y="713" class="metric-rows">Rows 6, 8, 9, 11  /  5, 6, 7, 8, 9, 10, 11, 12</text>
+</g>
+<g class="metric interactive-box" data-numerator="3,7,10,14" data-denominator="3,4,7,8,9,10,13,14" tabindex="0" role="button" aria-label="Human error correction: numerator scenarios 3, 7, 10, 14; denominator scenarios 3, 4, 7, 8, 9, 10, 13, 14">
+<rect x="57" y="737" width="339" height="61" rx="9" class="metric-card" />
+<text x="71" y="761" class="metric-label">Human error correction</text>
+<text x="71" y="784" class="metric-rows">Rows 3, 7, 10, 14  /  3, 4, 7, 8, 9, 10, 13, 14</text>
+</g>
+<g class="metric interactive-box" data-numerator="2,6,11,15" data-denominator="1,2,5,6,11,12,15,16" tabindex="0" role="button" aria-label="Human-induced error*: numerator scenarios 2, 6, 11, 15; denominator scenarios 1, 2, 5, 6, 11, 12, 15, 16">
+<rect x="411" y="737" width="339" height="61" rx="9" class="metric-card" />
+<text x="425" y="761" class="metric-label">Human-induced error*</text>
+<text x="425" y="784" class="metric-rows">Rows 2, 6, 11, 15  /  1, 2, 5, 6, 11, 12, 15, 16</text>
+</g>
+<g class="metric interactive-box" data-numerator="2,4,6,8" data-denominator="1,2,3,4,5,6,7,8" tabindex="0" role="button" aria-label="Final omission (FNR): numerator scenarios 2, 4, 6, 8; denominator scenarios 1, 2, 3, 4, 5, 6, 7, 8">
+<rect x="765" y="737" width="339" height="61" rx="9" class="metric-card" />
+<text x="779" y="761" class="metric-label">Final omission (FNR)</text>
+<text x="779" y="784" class="metric-rows">Rows 2, 4, 6, 8  /  1, 2, 3, 4, 5, 6, 7, 8</text>
+</g>
+<g class="metric interactive-box" data-numerator="9,11,13,15" data-denominator="9,10,11,12,13,14,15,16" tabindex="0" role="button" aria-label="Final commission (FPR): numerator scenarios 9, 11, 13, 15; denominator scenarios 9, 10, 11, 12, 13, 14, 15, 16">
+<rect x="1119" y="737" width="339" height="61" rx="9" class="metric-card" />
+<text x="1133" y="761" class="metric-label">Final commission (FPR)</text>
+<text x="1133" y="784" class="metric-rows">Rows 9, 11, 13, 15  /  9, 10, 11, 12, 13, 14, 15, 16</text>
+</g>
+<text x="58" y="822" class="bottom-note">* Human-induced error: deterioration from a correct initial human assessment; this does not independently establish AI causation.</text>
+
+</g>
+</svg></main>
+<script>
+(function(){
+ const cards=[...document.querySelectorAll('.scenario')];
+ const metricCards=[...document.querySelectorAll('.interactive-box')];
+ function activate(el){
+  const n=new Set((el.dataset.numerator||'').split(','));
+  const d=new Set((el.dataset.denominator||'').split(','));
+  metricCards.forEach(m=>m.classList.toggle('active',m===el));
+  cards.forEach(c=>{ const id=c.dataset.scenario;c.classList.toggle('numerator',n.has(id));c.classList.toggle('denominator',!n.has(id)&&d.has(id));c.classList.toggle('dimmed',!d.has(id)); });
+ }
+ function clear(){metricCards.forEach(m=>m.classList.remove('active'));cards.forEach(c=>c.classList.remove('numerator','denominator','dimmed'));}
+ metricCards.forEach(m=>{m.addEventListener('mouseenter',()=>activate(m));m.addEventListener('mouseleave',clear);m.addEventListener('focus',()=>activate(m));m.addEventListener('blur',clear);m.addEventListener('click',()=>{if(m.classList.contains('active')) clear(); else activate(m);});});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')clear();});
+})();
+</script></body></html>
